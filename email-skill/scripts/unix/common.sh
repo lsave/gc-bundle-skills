@@ -25,7 +25,7 @@ detect_os() {
 }
 
 CURRENT_OS=$(detect_os)
-echo "[QClaw] Detected OS: $CURRENT_OS"
+echo "[OpenClaw] Detected OS: $CURRENT_OS"
 
 # --------------------------------------------------------
 # 解析本地代理端口（跨平台兼容）
@@ -33,7 +33,7 @@ echo "[QClaw] Detected OS: $CURRENT_OS"
 
 # 从环境变量 AUTH_GATEWAY_PORT 获取本地代理端口
 # 该变量由 Electron 主进程在启动 Auth Gateway 时自动设置，子进程自动继承
-# 若环境变量未设置，则回退到默认端口 19000
+# 若环境变量未设置，则回退到默认端口 28788
 #
 # 兼容性说明：
 # - macOS / Linux: 直接使用 bash 的 ${VAR:-default} 语法
@@ -46,7 +46,7 @@ get_proxy_port() {
   # 如果环境变量为空，且在 WSL 环境下，尝试从 Windows 注册表或 cmd 获取
   if [[ -z "$port" && "$CURRENT_OS" == "linux" && -f /proc/version ]]; then
     if grep -qi microsoft /proc/version 2>/dev/null; then
-      echo "[QClaw] WSL detected, trying to read AUTH_GATEWAY_PORT from Windows environment" >&2
+      echo "[OpenClaw] WSL detected, trying to read AUTH_GATEWAY_PORT from Windows environment" >&2
       port=$(cmd.exe /C "echo %AUTH_GATEWAY_PORT%" 2>/dev/null | tr -d '\r' || true)
       # cmd.exe 中未设置的变量会原样返回 %AUTH_GATEWAY_PORT%
       if [[ "$port" == "%AUTH_GATEWAY_PORT%" || -z "$port" ]]; then
@@ -55,17 +55,17 @@ get_proxy_port() {
     fi
   fi
 
-  # 最终回退到默认端口 19000
+  # 最终回退到默认端口 28788
   if [[ -z "$port" ]]; then
-    port="19000"
-    echo "[QClaw] AUTH_GATEWAY_PORT not set, falling back to default port: $port" >&2
+    port="28788"
+    echo "[OpenClaw] AUTH_GATEWAY_PORT not set, falling back to default port: $port" >&2
   fi
 
   echo "$port"
 }
 
 PROXY_PORT=$(get_proxy_port)
-echo "[QClaw] AUTH_GATEWAY_PORT: $PROXY_PORT"
+echo "[OpenClaw] AUTH_GATEWAY_PORT: $PROXY_PORT"
 PROXY_BASE_URL="http://localhost:${PROXY_PORT}"
 
 # --------------------------------------------------------

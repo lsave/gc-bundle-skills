@@ -27,7 +27,7 @@ description: "日程/日历/会议/安排管理 Skill。当用户提到任何日
 
 ```
 第一步：查记忆
-  记忆中有 qclaw_calendar_platform？
+  记忆中有 calendar_platform？
   ├─ 有 → 直接用该平台，跳过检测 ✅
   └─ 没有 → 进入第二步
 
@@ -55,7 +55,7 @@ description: "日程/日历/会议/安排管理 Skill。当用户提到任何日
 
 **首次检测成功后**，写入记忆：
 ```json
-{ "qclaw_calendar_platform": "检测到的平台" }
+{ "calendar_platform": "检测到的平台" }
 ```
 
 **后续所有命令**，通过 `--platform` 参数传入记忆中的平台，跳过重复检测：
@@ -106,7 +106,7 @@ chcp 65001 >nul && powershell -File {SKILL_DIR}/scripts/calendar.ps1 -Platform o
 
 ## 🎉 首次使用引导（Onboarding）
 
-> 当记忆中**没有** `qclaw_calendar_platform` 时触发此流程。这是用户的第一印象，务必顺畅。
+> 当记忆中**没有** `calendar_platform` 时触发此流程。这是用户的第一印象，务必顺畅。
 
 ```
 触发条件：用户首次发出日程相关指令（如"看看明天有啥安排"），且记忆中无平台信息
@@ -188,7 +188,7 @@ chcp 65001 >nul && powershell -File {SKILL_DIR}/scripts/calendar.ps1 -Platform o
   │     → 成功后话术："配好了~ 以后{昵称}就能帮你管{平台名}日程了 🎉"
 
 第四步：记忆持久化
-  写入: { "qclaw_calendar_platform": "确定的平台" }
+  写入: { "calendar_platform": "确定的平台" }
   后续所有命令通过 --platform 参数传入，不再触发 Onboarding
 ```
 
@@ -404,11 +404,11 @@ chcp 65001 >nul && powershell -File {SKILL_DIR}/scripts/calendar.ps1 delete -Sum
 ## 时区处理
 
 - 默认使用用户系统时区
-- 首次检测时自动获取时区，写入记忆 `qclaw_timezone`
+- 首次检测时自动获取时区，写入记忆 `timezone`
   - macOS: 从系统设置或 `date +%Z` 获取
   - Windows: `(Get-TimeZone).Id`
 - AppleScript 的 `current date` 使用系统时区，无需额外处理
-- .ics 文件必须显式指定 TZID（脚本 `generate-ics` 支持 `timezone` 可选字段，默认 `Asia/Shanghai`，传入记忆中的 `qclaw_timezone` 即可）
+- .ics 文件必须显式指定 TZID（脚本 `generate-ics` 支持 `timezone` 可选字段，默认 `Asia/Shanghai`，传入记忆中的 `timezone` 即可）
 - 跨时区用户：每次操作前检查记忆中的时区是否与当前系统时区一致
 
 ---

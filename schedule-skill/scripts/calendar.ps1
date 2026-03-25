@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  QClaw 日历管理脚本 (Windows)
+  OpenClaw 日历管理脚本 (Windows)
   零额外依赖 — 仅使用 PowerShell (系统自带)
 
 .DESCRIPTION
@@ -478,11 +478,11 @@ function Generate-IcsFile($data, [datetime]$startDT, [datetime]$endDT, [string]$
     $lines = @(
         "BEGIN:VCALENDAR"
         "VERSION:2.0"
-        "PRODID:-//QClaw//Calendar//CN"
+        "PRODID:-//OpenClaw//Calendar//CN"
         "CALSCALE:GREGORIAN"
         "METHOD:PUBLISH"
         "BEGIN:VEVENT"
-        "UID:${uid}@qclaw"
+        "UID:${uid}@openclaw"
         "DTSTAMP:$dtstamp"
         "DTSTART;TZID=${timezone}:$dtstart"
         "DTEND;TZID=${timezone}:$dtend"
@@ -574,7 +574,7 @@ switch ($Command) {
     "open-feishu"     { Cmd-OpenFeishu }
     "help" {
         Write-Output @"
-QClaw 日历管理脚本 (Windows)
+OpenClaw 日历管理脚本 (Windows)
 
 Commands:
   detect                        检测可用日历平台

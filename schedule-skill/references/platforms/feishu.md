@@ -5,11 +5,11 @@
 
 ### 三种模式
 
-| 模式 | 条件 | 能力 |
-|------|------|------|
-| **A · MCP Server 全自动** | 已配置 lark-mcp / OpenClaw 飞书插件 | 完整 CRUD |
-| **B · Applink 半自动** | 安装了飞书客户端 | 仅创建（预填，需点保存） |
-| **C · .ics 降级** | 任何情况 | 生成文件，手动导入 |
+| 模式                      | 条件                                | 能力                     |
+| ------------------------- | ----------------------------------- | ------------------------ |
+| **A · MCP Server 全自动** | 已配置 lark-mcp / OpenClaw 飞书插件 | 完整 CRUD                |
+| **B · Applink 半自动**    | 安装了飞书客户端                    | 仅创建（预填，需点保存） |
+| **C · .ics 降级**         | 任何情况                            | 生成文件，手动导入       |
 
 ### 模式 A · 全自动（已配置 MCP Server 时）
 
@@ -39,7 +39,7 @@ MCP 配置：
 {
   "feishu_mcp_configured": true,
   "feishu_mode": "lark_mcp_server",
-  "qclaw_calendar_platform": "feishu_mcp"
+  "calendar_platform": "feishu_mcp"
 }
 ```
 

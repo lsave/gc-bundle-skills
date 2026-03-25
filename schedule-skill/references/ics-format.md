@@ -7,11 +7,11 @@
 ```
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//QClaw//Calendar//CN
+PRODID:-//OpenClaw//Calendar//CN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
-UID:{uuid4}@qclaw
+UID:{uuid4}@openclaw
 DTSTAMP:{UTC当前时间，格式 YYYYMMDDTHHmmssZ}
 DTSTART;TZID={时区，如Asia/Shanghai}:{开始时间，格式 YYYYMMDDTHHmmss}
 DTEND;TZID={时区，如Asia/Shanghai}:{结束时间，格式 YYYYMMDDTHHmmss}
@@ -28,7 +28,7 @@ END:VCALENDAR
 
 **格式铁律：**
 1. 每行以 CRLF（`\r\n`）结尾
-2. `DTSTART`/`DTEND` **必须带 TZID**，不能用裸时间戳。时区从记忆中的 `qclaw_timezone` 读取，默认 `Asia/Shanghai`
+2. `DTSTART`/`DTEND` **必须带 TZID**，不能用裸时间戳。时区从记忆中的 `timezone` 读取，默认 `Asia/Shanghai`
 3. `DTSTAMP` **必须是 UTC 时间**（带 `Z`）
 4. `UID` 必须全局唯一（用 UUID v4）
 5. 文件名格式：`{标题}.ics`，中文可用

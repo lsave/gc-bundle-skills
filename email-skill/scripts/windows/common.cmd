@@ -14,16 +14,16 @@ REM --------------------------------------------------------
 
 REM 从环境变量 AUTH_GATEWAY_PORT 获取本地代理端口
 REM 该变量由 Electron 主进程在启动 Auth Gateway 时自动设置，子进程自动继承
-REM 若环境变量未设置，则回退到默认端口 19000
+REM 若环境变量未设置，则回退到默认端口 28788
 
 if defined AUTH_GATEWAY_PORT (
     set "PROXY_PORT=%AUTH_GATEWAY_PORT%"
 ) else (
-    set "PROXY_PORT=19000"
-    echo [QClaw] AUTH_GATEWAY_PORT not set, falling back to default port: 19000 >&2
+    set "PROXY_PORT=28788"
+    echo [OpenClaw] AUTH_GATEWAY_PORT not set, falling back to default port: 28788 >&2
 )
 
-echo [QClaw] AUTH_GATEWAY_PORT: %PROXY_PORT%
+echo [OpenClaw] AUTH_GATEWAY_PORT: %PROXY_PORT%
 
 set "PROXY_BASE_URL=http://localhost:%PROXY_PORT%"
 

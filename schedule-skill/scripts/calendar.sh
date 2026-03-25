@@ -1,5 +1,5 @@
 #!/bin/bash
-# QClaw 日历管理脚本 (macOS)
+# OpenClaw 日历管理脚本 (macOS)
 # 零额外依赖 — 仅使用 bash + osascript (系统自带)
 #
 # Usage: calendar.sh <command> [options]
@@ -23,7 +23,7 @@ die() { echo "ERROR: $*" >&2; exit 1; }
 
 # 全局平台缓存（通过 --platform 参数传入或自动 detect）
 PLATFORM=""
-_PLATFORM_CACHE_FILE="/tmp/.qclaw_platform_$$"
+_PLATFORM_CACHE_FILE="/tmp/.openclaw_platform_$$"
 
 # 获取当前平台：优先用缓存，没有则 detect（多平台时取第一个）
 # 修复：原实现在 $() 子 shell 中赋值 PLATFORM 无法回传到父 shell
@@ -811,7 +811,7 @@ cmd_generate_ics() {
 
   # UUID
   local uid
-  uid=$(uuidgen 2>/dev/null || cat /proc/sys/kernel/random/uuid 2>/dev/null || echo "$(date +%s)-$$-qclaw")
+  uid=$(uuidgen 2>/dev/null || cat /proc/sys/kernel/random/uuid 2>/dev/null || echo "$(date +%s)-$$-openclaw")
 
   # 清理文件名：替换危险字符为下划线，防止路径遍历和文件创建失败
   local safe_summary
@@ -822,11 +822,11 @@ cmd_generate_ics() {
   {
     printf 'BEGIN:VCALENDAR\r\n'
     printf 'VERSION:2.0\r\n'
-    printf 'PRODID:-//QClaw//Calendar//CN\r\n'
+    printf 'PRODID:-//OpenClaw//Calendar//CN\r\n'
     printf 'CALSCALE:GREGORIAN\r\n'
     printf 'METHOD:PUBLISH\r\n'
     printf 'BEGIN:VEVENT\r\n'
-    printf 'UID:%s@qclaw\r\n' "$uid"
+    printf 'UID:%s@openclaw\r\n' "$uid"
     printf 'DTSTAMP:%s\r\n' "$dtstamp"
     printf 'DTSTART;TZID=%s:%s\r\n' "$timezone" "$dt_start"
     printf 'DTEND;TZID=%s:%s\r\n' "$timezone" "$dt_end"
@@ -944,7 +944,7 @@ case "$cmd" in
   open-feishu)      cmd_open_feishu ;;
   open-outlookcal)  cmd_open_outlookcal ;;
   help|*)
-    echo "QClaw 日历管理脚本 (macOS)"
+    echo "OpenClaw 日历管理脚本 (macOS)"
     echo ""
     echo "Commands:"
     echo "  detect                        检测可用日历平台"
