@@ -1,0 +1,25 @@
+{
+  "name": "daily-horoscope",
+  "version": "3.0.0",
+  "scene": "创建定时任务：每日星座行动建议",
+  "category": "娱乐游戏",
+  "subtitle": "每日星座专属指引，规划当日行动",
+  "target_user": "星座爱好者、日常决策参考用户",
+  "core_need": "每日自动获取星座运势指引",
+  "trigger_words": [
+    "星座运势",
+    "每日星座",
+    "今日运势"
+  ],
+  "output_format": "文字简报 + 定时任务确认",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "write_to_file",
+    "automation_update"
+  ],
+  "dependencies": [],
+  "real_objects": "定时任务（automation_update）、运势简报文件",
+  "deliverables": "每日星座简报（Markdown）",
+  "need_external_search": "是"
+}

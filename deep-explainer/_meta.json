@@ -1,0 +1,23 @@
+{
+  "name": "deep-explainer",
+  "version": "3.0.0",
+  "scene": "深度内容讲解",
+  "category": "研究学习",
+  "subtitle": "遇到难题卡壳想放弃？帮你拆解卡点，找到破局思路",
+  "target_user": "初学者",
+  "core_need": "理解复杂概念",
+  "trigger_words": [
+    "讲解 XXX",
+    "什么是 XXX"
+  ],
+  "output_format": "讲解文档 + 资源链接",
+  "priority": "P1",
+  "tools": [
+    "web_search",
+    "write_to_file"
+  ],
+  "dependencies": [],
+  "real_objects": "Markdown 讲解文档",
+  "deliverables": "讲解文档、延伸阅读清单",
+  "need_external_search": "是"
+}

@@ -1,0 +1,26 @@
+{
+  "name": "goal-decomposer",
+  "version": "3.0.0",
+  "scene": "目标拆解与打卡",
+  "category": "自律生活",
+  "subtitle": "立的flag总倒？把大目标拆成小步骤，每天打卡追踪进度",
+  "target_user": "有目标但执行力不足的人、自我管理者",
+  "core_need": "把大目标拆小，坚持执行并追踪进度",
+  "trigger_words": [
+    "目标管理",
+    "拆解目标",
+    "打卡"
+  ],
+  "output_format": "计划文件 + 进度表 + 定时任务确认",
+  "priority": "P2",
+  "tools": [
+    "write_to_file",
+    "automation_update"
+  ],
+  "dependencies": [
+    "goal-tracker"
+  ],
+  "real_objects": "目标计划文件（write_to_file）、定时任务（automation_update）",
+  "deliverables": "目标计划文件、进度追踪表、周/月回顾报告",
+  "need_external_search": "否"
+}

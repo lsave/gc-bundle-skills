@@ -1,0 +1,26 @@
+{
+  "name": "doc-organizer",
+  "version": "3.0.0",
+  "scene": "把一堆资料整理成结构化文档",
+  "category": "研究学习",
+  "subtitle": "收藏夹塞满了却从没看？把资料链接发给我，帮你提炼出有用的东西",
+  "target_user": "学生、研究人员、知识工作者",
+  "core_need": "将零散资料整理成可用的结构化知识",
+  "trigger_words": [
+    "整理资料",
+    "资料归类",
+    "文档整理"
+  ],
+  "output_format": "Markdown 结构化文档 + 关键词索引",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "web_fetch",
+    "write_to_file",
+    "read_file"
+  ],
+  "dependencies": [],
+  "real_objects": "Markdown 文件、网页内容（web_fetch）、本地文件",
+  "deliverables": "结构化 Markdown 文档、关键词索引文件",
+  "need_external_search": "是"
+}

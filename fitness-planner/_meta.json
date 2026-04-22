@@ -1,0 +1,24 @@
+{
+  "name": "fitness-planner",
+  "version": "3.0.0",
+  "scene": "定时任务：明日运动计划",
+  "category": "自律生活",
+  "subtitle": "想运动又怕坚持不下来？每天帮你排好计划，到点喊你动起来",
+  "target_user": "想坚持运动的上班族、健身新手",
+  "core_need": "坚持运动，获得每日个性化指导",
+  "trigger_words": [
+    "运动计划",
+    "健身提醒",
+    "明日运动"
+  ],
+  "output_format": "文字运动计划 + 定时任务确认",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "automation_update"
+  ],
+  "dependencies": [],
+  "real_objects": "定时任务（automation_update）、运动计划文件（write_to_file）",
+  "deliverables": "运动计划文件、运动记录表",
+  "need_external_search": "是"
+}

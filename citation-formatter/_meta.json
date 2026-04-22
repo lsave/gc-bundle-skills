@@ -1,0 +1,28 @@
+{
+  "name": "citation-formatter",
+  "version": "3.0.0",
+  "scene": "参考文献格式规范",
+  "category": "研究学习",
+  "subtitle": "写论文引用格式老出错？自动管理参考文献，一键切换APA/MLA格式",
+  "target_user": "论文写作者、学术研究人员",
+  "core_need": "自动化参考文献格式管理",
+  "trigger_words": [
+    "参考文献",
+    "引用格式",
+    "APA格式"
+  ],
+  "output_format": "格式化参考文献列表 + BibTeX 文件",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "web_fetch",
+    "write_to_file",
+    "execute_command (pandas)"
+  ],
+  "dependencies": [
+    "citation-manager"
+  ],
+  "real_objects": "文献数据文件（write_to_file）、网页内容（web_fetch）",
+  "deliverables": "参考文献列表文档、BibTeX 文件",
+  "need_external_search": "是"
+}

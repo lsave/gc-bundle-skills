@@ -1,0 +1,25 @@
+{
+  "name": "weather-outfit-advisor",
+  "version": "3.0.0",
+  "scene": "实时天气查询与出行穿搭建议",
+  "category": "自律生活",
+  "subtitle": "支持实时温度、湿度、风力、空气质量查询，未来 7 天天气预报，智能穿衣建议及极端天气预警",
+  "target_user": "出门需要穿搭参考的人",
+  "core_need": "快速了解天气并获得穿搭指导",
+  "trigger_words": [
+    "天气",
+    "穿什么",
+    "明天天气"
+  ],
+  "output_format": "天气数据 + 穿搭建议 + 预警提示",
+  "priority": "P2",
+  "tools": [
+    "web_search"
+  ],
+  "dependencies": [
+    "weather-advisor"
+  ],
+  "real_objects": "Markdown 天气报告（write_to_file）",
+  "deliverables": "天气+穿搭建议文档",
+  "need_external_search": "是"
+}

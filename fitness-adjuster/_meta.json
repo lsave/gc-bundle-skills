@@ -1,0 +1,25 @@
+{
+  "name": "fitness-adjuster",
+  "version": "3.0.0",
+  "scene": "锻炼任务调整",
+  "category": "自律生活",
+  "subtitle": "锻炼计划乱了？帮你重新安排锻炼节奏",
+  "target_user": "正在执行运动计划的用户",
+  "core_need": "根据实际情况灵活调整运动计划",
+  "trigger_words": [
+    "调整运动",
+    "计划变更",
+    "运动替代"
+  ],
+  "output_format": "更新后的运动计划文件 + 调整说明",
+  "priority": "P2",
+  "tools": [
+    "write_to_file",
+    "read_file",
+    "automation_update"
+  ],
+  "dependencies": [],
+  "real_objects": "运动计划文件（read_file/write_to_file）、定时任务",
+  "deliverables": "更新后的运动计划文件",
+  "need_external_search": "否"
+}

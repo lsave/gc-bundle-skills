@@ -1,0 +1,26 @@
+{
+  "name": "macro-economy-brief",
+  "version": "3.0.0",
+  "scene": "经济数据查询",
+  "category": "财务金融",
+  "subtitle": "读懂 GDP、利率、CPI，把握市场关键参考",
+  "target_user": "投资者、金融从业者、经济学学生",
+  "core_need": "快速了解宏观经济形势",
+  "trigger_words": [
+    "GDP数据",
+    "CPI查询",
+    "利率分析"
+  ],
+  "output_format": "Markdown 经济简报 + 数据表格",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "write_to_file"
+  ],
+  "dependencies": [
+    "macro-monitor"
+  ],
+  "real_objects": "Markdown 简报文件（write_to_file）",
+  "deliverables": "宏观经济简报（Markdown）",
+  "need_external_search": "是"
+}

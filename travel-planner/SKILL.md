@@ -1,128 +1,135 @@
 ---
 name: travel-planner
-description: "AI旅行规划助手。自动生成个性化旅行计划，包含路线、住宿和预算。Keywords: 旅行, 攻略, travel plan, itinerary."
+description: "懒人出游规划。周末不知道去哪玩？直接喂到你嘴边 This skill should be used when the user asks about 懒人出游规划. Keywords: 出游规划, 周末去哪玩, 旅行计划."
 ---
 
-# AI旅行规划 — 自动生成个性化旅行计划含路线预算
+# 懒人出游规划
 
-## 概述
-
-自动生成个性化旅行计划含路线预算。适用于制定旅行计划、景点路线规划、住宿比价、旅行预算控制等场景。
-
-**触发关键词**: 旅行, 攻略, travel plan, itinerary
+> 周末不知道去哪玩？直接喂到你嘴边
 
 ## 前置依赖
 
 ```bash
-pip install requests geopy
+pip install pandas
 ```
 
 ## 核心能力
 
-### 能力1：智能行程规划——根据天数/预算/偏好自动安排
-智能行程规划——根据天数/预算/偏好自动安排
+### 能力1：询问我的出发地、时间、预算和偏好
 
-### 能力2：实时信息整合——天气/汇率/签证/交通
-实时信息整合——天气/汇率/签证/交通
+用 `web_search` 搜索目的地的天气、交通、住宿信息；用 `web_fetch` 抓取旅游攻略网站的详细内容。
 
-### 能力3：住宿和餐厅推荐——评分/价格/位置多维筛选
-住宿和餐厅推荐——评分/价格/位置多维筛选
+### 能力2：检索目的地推荐（web_search）
 
+用 `web_search` 搜索相关信息。
 
-## 命令列表
+### 能力3：查询天气信息
 
-| 命令 | 说明 | 用法 |
-|------|------|------|
-| `plan` | 生成旅行计划 | `python3 scripts/travel_planner_tool.py plan [参数]` |
-| `budget` | 预算估算 | `python3 scripts/travel_planner_tool.py budget [参数]` |
-| `checklist` | 出行清单 | `python3 scripts/travel_planner_tool.py checklist [参数]` |
+用 `web_search` 搜索目的地的天气、交通、住宿信息；用 `web_fetch` 抓取旅游攻略网站的详细内容。
 
+### 能力4：规划行程（交通+住宿+景点）
+
+用 `web_search` 搜索目的地的天气、交通、住宿信息；用 `web_fetch` 抓取旅游攻略网站的详细内容。
+
+### 能力5：生成可打印的出行方案文档
+
+用 `write_to_file` 生成文件。
 
 ## 使用流程
 
-### 场景 1
+### 步骤 1：收集用户需求
+
+向用户确认以下信息（如果未主动提供）：
+- 出发地和目的地（或「帮我推荐」）
+- 出发日期和天数
+- 预算范围（经济/中等/高端）
+- 出行人数和同伴类型（独行/情侣/家庭/朋友）
+- 特殊偏好（美食/文化/自然/网红打卡）
+
+### 步骤 2：检索外部信息
+
+执行以下搜索获取真实数据：
 
 ```
-规划5天日本东京自由行
+web_search("[目的地] 旅游攻略 最新")
+web_search("[目的地] 天气预报 [出发日期]")
+web_search("[目的地] 酒店推荐 [预算范围]")
+web_search("[目的地] 必去景点 美食推荐")
 ```
 
-**执行：**
+确保获取到以下资源：
+- 景点推荐链接
+- 交通方案
+- 住宿推荐
+- 美食攻略
+
+### 步骤 3：运行脚本处理数据
+
 ```bash
-python3 scripts/travel_planner_tool.py plan --dest Tokyo --days 5 --budget medium
+python3 scripts/travel_planner_tool.py run \
+  --input "用户提供的输入" \
+  --output "/path/to/output_file"
 ```
 
-### 场景 2
+读取脚本输出的结果，确认数据处理成功。
 
-```
-估算这趟旅行的费用
-```
+### 步骤 4：生成最终产出
 
-**执行：**
-```bash
-python3 scripts/travel_planner_tool.py budget --dest Tokyo --days 5 --from Shanghai
-```
+基于脚本输出和搜索到的资源，用 `write_to_file` 生成以下文件：
 
-### 场景 3
+- **完整行程方案文档（Markdown）**
 
-```
-生成出发前的准备清单
-```
+输出格式要求：文字行程方案 + 资源链接 + 天气提示
 
-**执行：**
-```bash
-python3 scripts/travel_planner_tool.py checklist --dest Tokyo --season spring
-```
+### 步骤 5：汇总交付
 
+向用户展示：
+1. 生成的文件路径和内容摘要
+2. 搜集到的资源链接列表
+3. 关键发现和建议
 
 ## 输出格式
 
 ```markdown
-# 📊 AI旅行规划报告
+# 📋 懒人出游规划 — 执行报告
 
 **生成时间**: YYYY-MM-DD HH:MM
+**目标用户**: 上班族、情侣、家庭出游人群
 
-## 核心发现
-1. [关键发现1]
-2. [关键发现2]
-3. [关键发现3]
+## 执行摘要
+[基于实际执行结果的一段话摘要]
 
-## 数据概览
-| 指标 | 数值 | 趋势 | 评级 |
-|------|------|------|------|
-| 指标A | XXX | ↑ | ⭐⭐⭐⭐ |
-| 指标B | YYY | → | ⭐⭐⭐ |
+## 详细结果
 
-## 详细分析
-[基于实际数据的多维度分析内容]
+### 📊 生成的文件
+| 文件名 | 类型 | 说明 |
+|--------|------|------|
+| [文件名] | [类型] | [说明] |
+
+### 🔗 资源链接
+| 名称 | 链接 | 说明 |
+|------|------|------|
+| [资源] | [URL] | [说明] |
 
 ## 行动建议
-| 优先级 | 建议 | 预期效果 |
-|--------|------|----------|
-| 🔴 高 | [具体建议] | [量化预期] |
-| 🟡 中 | [具体建议] | [量化预期] |
-| 🟢 低 | [具体建议] | [量化预期] |
+[具体的下一步建议]
 ```
 
-## 参考资料
+## 验收标准
 
-### 原有链接
-- [Google Places API，景点搜索和详情](https://developers.google.com/maps/documentation/places/web-service)
-- [多渠道助手用例](https://github.com/hesamsheikh/awesome-openclaw-usecases/blob/main/usecases/multi-channel-assistant.md)
-- [OpenWeatherMap API，天气预报](https://openweathermap.org/api)
-### GitHub
-- [GitHub: 交通旅游类免费API合集](https://github.com/public-apis/public-apis)
-### HackerNews
-- [HackerNews: AI旅行规划工具效果对比](https://news.ycombinator.com/item?id=46014902)
-### Reddit
-- [Reddit r/travel: travel社区AI相关讨论](https://www.reddit.com/r/travel/comments/102f1dfyyz/travel_planner_ai/)
-### 微信公众号
-- [微信公众号: AI旅行助手——自动生成个性化计划](https://mp.weixin.qq.com/s/JRPUTIOZUNREOQEYGJCAHZ)
-### 小红书
-- [小红书: 用AI规划7天日本自由行——行程+预算全攻略](https://www.xiaohongshu.com/explore/209538161365729613306448)
+- ✅ 程完整（交通+住宿+景点）
+- ✅ 天气信息准确
+- ✅ 预算合理
+- ✅ 方案可执行
+
+## 场景化适配
+
+根据人数、预算、季节、出行方式调整方案
+
 
 ## 注意事项
 
-- 所有分析基于脚本获取的实际数据，不编造数据
-- 数据缺失字段标注"数据不可用"而非猜测
-- 建议结合人工判断使用，AI分析仅供参考
-- 首次使用请先安装Python依赖：`pip install requests geopy`
+- 所有数据必须来自 `web_search` / `web_fetch` 的真实搜索结果，**严禁编造数据**
+- 数据缺失时标注"数据不可用"而非猜测
+- 报告必须保存为文件（`write_to_file`），不能只在对话中输出
+- 建议结合人工判断使用，AI 分析仅供参考

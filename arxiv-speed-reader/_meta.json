@@ -1,0 +1,27 @@
+{
+  "name": "arxiv-speed-reader",
+  "version": "3.0.0",
+  "scene": "AI论文速读",
+  "category": "研究学习",
+  "subtitle": "论文太多读不完？AI帮你秒懂arXiv论文核心观点，自动对比多篇方法差异",
+  "target_user": "科研人员、AI 从业者、研究生",
+  "core_need": "快速掌握论文核心内容",
+  "trigger_words": [
+    "读论文",
+    "论文分析",
+    "arXiv"
+  ],
+  "output_format": "Markdown 阅读笔记 + 对比分析",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "web_fetch",
+    "write_to_file"
+  ],
+  "dependencies": [
+    "arxiv-reader"
+  ],
+  "real_objects": "Markdown 笔记文件（write_to_file）、论文数据",
+  "deliverables": "论文阅读笔记（Markdown）、对比分析表",
+  "need_external_search": "是"
+}

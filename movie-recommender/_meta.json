@@ -1,0 +1,27 @@
+{
+  "name": "movie-recommender",
+  "version": "3.0.0",
+  "scene": "影视推荐小助手",
+  "category": "娱乐游戏",
+  "subtitle": "周末不知道看啥？按口味精准推荐，片源直接给到",
+  "target_user": "影视爱好者、周末想找片看的人",
+  "core_need": "快速找到符合口味的优质影视作品",
+  "trigger_words": [
+    "推荐电影",
+    "好片推荐",
+    "今晚看什么"
+  ],
+  "output_format": "推荐清单 + 评分 + 观看链接",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "web_fetch",
+    "write_to_file"
+  ],
+  "dependencies": [
+    "movie-advisor"
+  ],
+  "real_objects": "Markdown 推荐清单（write_to_file）",
+  "deliverables": "推荐清单文档（含评分+链接）",
+  "need_external_search": "是"
+}

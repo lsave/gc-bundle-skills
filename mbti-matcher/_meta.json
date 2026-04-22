@@ -1,0 +1,25 @@
+{
+  "name": "mbti-matcher",
+  "version": "3.0.0",
+  "scene": "MBTI 配对分析",
+  "category": "娱乐游戏",
+  "subtitle": "想知道合不合？帮你分析性格契合度",
+  "target_user": "情侣、朋友、职场搭档",
+  "core_need": "了解两人性格契合度和相处方式",
+  "trigger_words": [
+    "MBTI配对",
+    "性格匹配",
+    "MBTI分析"
+  ],
+  "output_format": "Markdown 配对报告 + 相处建议",
+  "priority": "P2",
+  "tools": [
+    "write_to_file"
+  ],
+  "dependencies": [
+    "agent-mbti"
+  ],
+  "real_objects": "Markdown 分析报告（write_to_file）",
+  "deliverables": "配对分析报告（Markdown）",
+  "need_external_search": "否"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "startup-validator",
+  "version": "3.0.0",
+  "scene": "创业点子可行性验证",
+  "category": "办公提效",
+  "subtitle": "有想法不敢下手？帮你快速验证可行性，零成本少踩坑。",
+  "target_user": "创业者、独立开发者、产品经理",
+  "core_need": "在投入资源前验证创意是否有市场空间",
+  "trigger_words": [
+    "验证想法",
+    "创业分析",
+    "可行性"
+  ],
+  "output_format": "Markdown 分析报告 + MVP 路线图",
+  "priority": "P2",
+  "tools": [
+    "read_file",
+    "web_fetch",
+    "web_search",
+    "write_to_file"
+  ],
+  "dependencies": [
+    "idea-validator"
+  ],
+  "real_objects": "Markdown 分析报告（write_to_file）、竞品数据",
+  "deliverables": "可行性分析报告、MVP 路线图文档",
+  "need_external_search": "是"
+}

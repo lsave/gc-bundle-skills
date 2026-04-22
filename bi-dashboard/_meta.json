@@ -1,0 +1,28 @@
+{
+  "name": "bi-dashboard",
+  "version": "3.0.0",
+  "scene": "业务指标可视化管理",
+  "category": "办公提效",
+  "subtitle": "业务数据看板生成器",
+  "target_user": "运营总监、产品负责人、数据分析师",
+  "core_need": "实时掌握业务关键指标",
+  "trigger_words": [
+    "数据看板",
+    "KPI监控",
+    "可视化"
+  ],
+  "output_format": "HTML/Markdown 看板 + 图表 + 告警规则",
+  "priority": "P2",
+  "tools": [
+    "write_to_file",
+    "read_file",
+    "execute_command",
+    "execute_command (pandas)"
+  ],
+  "dependencies": [
+    "analytics-dashboard"
+  ],
+  "real_objects": "数据文件（read_file）、Python 脚本（execute_command）",
+  "deliverables": "数据看板报告（HTML/Markdown）、图表文件",
+  "need_external_search": "否"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "study-planner",
+  "version": "3.0.0",
+  "scene": "制定轻量学习规划",
+  "category": "研究学习",
+  "subtitle": "一到备考就头大？把你的学习计划烂摊子全甩给我吧",
+  "target_user": "备考学生",
+  "core_need": "7 天内高效备考",
+  "trigger_words": [
+    "制定学习计划",
+    "备考计划"
+  ],
+  "output_format": "文字 + Excel 文件 + 日程确认 + 资源链接",
+  "priority": "P0",
+  "tools": [
+    "web_search",
+    "web_fetch",
+    "write_to_file",
+    "automation_update",
+    "execute_command (pandas)"
+  ],
+  "dependencies": [
+    "proactive-agent"
+  ],
+  "real_objects": "Excel 文件、系统日程、学习进度文件",
+  "deliverables": "Excel 计划表、进度追踪表",
+  "need_external_search": "是"
+}

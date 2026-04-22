@@ -1,0 +1,27 @@
+{
+  "name": "habit-builder",
+  "version": "3.0.0",
+  "scene": "自律习惯管理",
+  "category": "自律生活",
+  "subtitle": "好习惯总坚持不了？21天打卡+数据追踪帮你养成好习惯",
+  "target_user": "想养成好习惯的人、自律提升者",
+  "core_need": "通过打卡机制坚持好习惯",
+  "trigger_words": [
+    "习惯打卡",
+    "21天挑战",
+    "自律"
+  ],
+  "output_format": "打卡记录 + 统计数据 + 习惯报告",
+  "priority": "P2",
+  "tools": [
+    "write_to_file",
+    "automation_update",
+    "execute_command (pandas)"
+  ],
+  "dependencies": [
+    "habit-tracker"
+  ],
+  "real_objects": "打卡记录文件（write_to_file）、定时任务（automation_update）",
+  "deliverables": "打卡记录表、习惯报告",
+  "need_external_search": "否"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "knowledge-framework",
+  "version": "3.0.0",
+  "scene": "知识点框架梳理",
+  "category": "研究学习",
+  "subtitle": "看书越看越乱？帮你把知识点理成一张清晰骨架图",
+  "target_user": "学生",
+  "core_need": "理清知识点脉络",
+  "trigger_words": [
+    "知识框架",
+    "知识点梳理"
+  ],
+  "output_format": "Markdown 思维导图 + 标注文档",
+  "priority": "P0",
+  "tools": [
+    "web_search",
+    "write_to_file"
+  ],
+  "dependencies": [],
+  "real_objects": "Markdown 文件、PDF 总结",
+  "deliverables": "知识框架图、重点标注文档",
+  "need_external_search": "是"
+}

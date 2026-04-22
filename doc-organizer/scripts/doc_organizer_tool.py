@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-社媒内容做同款 — 工具脚本
-将长文章/视频自动拆解为适合不同平台的短内容
+把一堆资料整理成结构化文档 — 工具脚本
+收藏夹塞满了却从没看？把资料链接发给我，帮你提炼出有用的东西
 
-目标用户: 内容运营、自媒体博主、品牌方
-输出产物: 多平台内容包（小红书+推文+视频文案）
+目标用户: 学生、研究人员、知识工作者
+输出产物: 结构化 Markdown 文档、关键词索引文件
 """
 
 import sys, json, os, argparse
@@ -19,13 +19,13 @@ def ensure_dirs():
 
 
 def cmd_run(args):
-    """社媒内容做同款 - 主工作流"""
+    """把一堆资料整理成结构化文档 - 主工作流"""
     ensure_dirs()
     input_data = args.input or ""
     output_path = args.output or os.path.join(DATA_DIR, "output_{}.md".format(datetime.now().strftime("%Y%m%d_%H%M%S")))
     
     # Generate Markdown report
-    report = f"""# 📋 社媒内容做同款
+    report = f"""# 📋 把一堆资料整理成结构化文档
 
 **生成时间**: {datetime.now().strftime('%Y-%m-%d %H:%M')}
 **输入**: {input_data}
@@ -55,7 +55,7 @@ def cmd_run(args):
         "status": "success",
         "output_file": output_path,
         "input": input_data,
-        "message": f"社媒内容做同款报告已生成到 {output_path}",
+        "message": f"把一堆资料整理成结构化文档报告已生成到 {output_path}",
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
@@ -67,8 +67,8 @@ def cmd_status(args):
     if os.path.exists(DATA_DIR):
         data_files = [f for f in os.listdir(DATA_DIR) if not f.startswith(".")]
     result = {
-        "skill": "content-repurposer",
-        "scene": "社媒内容做同款",
+        "skill": "doc-organizer",
+        "scene": "把一堆资料整理成结构化文档",
         "data_dir": DATA_DIR,
         "data_files": data_files,
         "file_count": len(data_files),
@@ -94,7 +94,7 @@ def cmd_export(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="社媒内容做同款")
+    parser = argparse.ArgumentParser(description="把一堆资料整理成结构化文档")
     subparsers = parser.add_subparsers(dest="command", help="可用命令")
     
     run_p = subparsers.add_parser("run", help="执行主工作流")

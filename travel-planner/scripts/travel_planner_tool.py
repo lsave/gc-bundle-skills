@@ -1,119 +1,123 @@
 #!/usr/bin/env python3
 """
-AI旅行规划 — 工具脚本
-功能: plan: 生成旅行计划, budget: 预算估算, checklist: 出行清单
+懒人出游规划 — 工具脚本
+周末不知道去哪玩？直接喂到你嘴边
 
-用法:
-    python3 travel_planner_tool.py plan [args]    # 生成旅行计划
-    python3 travel_planner_tool.py budget [args]    # 预算估算
-    python3 travel_planner_tool.py checklist [args]    # 出行清单
+目标用户: 上班族、情侣、家庭出游人群
+输出产物: 完整行程方案文档（Markdown）
 """
 
-import sys, json, os
+import sys, json, os, argparse
 from datetime import datetime
+import pandas as pd
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
-REF_URLS = ["https://developers.google.com/maps/documentation/places/web-service", "https://github.com/hesamsheikh/awesome-openclaw-usecases/blob/main/usecases/multi-channel-assistant.md", "https://openweathermap.org/api", "https://github.com/public-apis/public-apis", "https://news.ycombinator.com/item?id=46014902"]
 
-def ensure_data_dir():
+
+def ensure_dirs():
     os.makedirs(DATA_DIR, exist_ok=True)
 
-def load_data():
-    data_file = os.path.join(DATA_DIR, "travel_planner_data.json")
-    if os.path.exists(data_file):
-        with open(data_file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"records": [], "created": datetime.now().isoformat(), "tool": "travel-planner"}
 
-def save_data(data):
-    ensure_data_dir()
-    data_file = os.path.join(DATA_DIR, "travel_planner_data.json")
-    with open(data_file, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def cmd_run(args):
+    """懒人出游规划 - 主工作流"""
+    ensure_dirs()
+    input_data = args.input or ""
+    output_path = args.output or os.path.join(DATA_DIR, "output_{}.md".format(datetime.now().strftime("%Y%m%d_%H%M%S")))
+    
+    # Generate Markdown report
+    report = f"""# 📋 懒人出游规划
 
-def plan(args):
-    """生成旅行计划"""
-    data = load_data()
-    record = {
-        "timestamp": datetime.now().isoformat(),
-        "command": "plan",
-        "input": " ".join(args) if args else "",
-        "status": "completed"
-    }
-    data["records"].append(record)
-    save_data(data)
-    return {
+**生成时间**: {datetime.now().strftime('%Y-%m-%d %H:%M')}
+**输入**: {input_data}
+
+## 分析结果
+
+[此处将由AI基于web_search/web_fetch的真实数据填充]
+
+## 详细内容
+
+| 序号 | 项目 | 状态 | 说明 |
+|------|------|------|------|
+| 1 | [待填充] | [待填充] | [待填充] |
+
+## 建议
+
+[基于分析给出的具体建议]
+
+---
+*报告由AI自动生成，仅供参考*
+"""
+    
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(report)
+    
+    result = {
         "status": "success",
-        "command": "plan",
-        "message": "生成旅行计划完成",
-        "record": record,
-        "total_records": len(data["records"]),
-        "reference_urls": REF_URLS[:3]
+        "output_file": output_path,
+        "input": input_data,
+        "message": f"懒人出游规划报告已生成到 {output_path}",
     }
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
 
-def budget(args):
-    """预算估算"""
-    data = load_data()
-    record = {
-        "timestamp": datetime.now().isoformat(),
-        "command": "budget",
-        "input": " ".join(args) if args else "",
-        "status": "completed"
-    }
-    data["records"].append(record)
-    save_data(data)
-    return {
-        "status": "success",
-        "command": "budget",
-        "message": "预算估算完成",
-        "record": record,
-        "total_records": len(data["records"]),
-        "reference_urls": REF_URLS[:3]
-    }
 
-def checklist(args):
-    """出行清单"""
-    data = load_data()
-    record = {
-        "timestamp": datetime.now().isoformat(),
-        "command": "checklist",
-        "input": " ".join(args) if args else "",
-        "status": "completed"
+def cmd_status(args):
+    """查看当前状态"""
+    data_files = []
+    if os.path.exists(DATA_DIR):
+        data_files = [f for f in os.listdir(DATA_DIR) if not f.startswith(".")]
+    result = {
+        "skill": "travel-planner",
+        "scene": "懒人出游规划",
+        "data_dir": DATA_DIR,
+        "data_files": data_files,
+        "file_count": len(data_files),
     }
-    data["records"].append(record)
-    save_data(data)
-    return {
-        "status": "success",
-        "command": "checklist",
-        "message": "出行清单完成",
-        "record": record,
-        "total_records": len(data["records"]),
-        "reference_urls": REF_URLS[:3]
-    }
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_export(args):
+    """导出结果"""
+    fmt = getattr(args, "format", "json") or "json"
+    data_files = []
+    if os.path.exists(DATA_DIR):
+        data_files = [os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR) if not f.startswith(".")]
+    
+    if fmt == "json":
+        output = json.dumps({"files": data_files, "count": len(data_files)}, ensure_ascii=False, indent=2)
+    else:
+        output = "\n".join(data_files)
+    
+    print(output)
+    return 0
+
 
 def main():
-    cmds = ["plan", "budget", "checklist"]
-    if len(sys.argv) < 2 or sys.argv[1] not in cmds:
-        print(json.dumps({
-            "error": f"用法: travel_planner_tool.py <{','.join(cmds)}> [args]",
-            "available_commands": {c: "" for c in cmds},
-            "tool": "travel-planner",
-        }, ensure_ascii=False, indent=2))
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="懒人出游规划")
+    subparsers = parser.add_subparsers(dest="command", help="可用命令")
     
-    cmd = sys.argv[1]
-    args = sys.argv[2:]
+    run_p = subparsers.add_parser("run", help="执行主工作流")
+    run_p.add_argument("--input", "-i", help="输入数据或描述")
+    run_p.add_argument("--output", "-o", help="输出文件路径")
     
-    if cmd == "plan":
-        result = plan(args)
-    elif cmd == "budget":
-        result = budget(args)
-    elif cmd == "checklist":
-        result = checklist(args)
+    subparsers.add_parser("status", help="查看当前状态")
+    
+    export_p = subparsers.add_parser("export", help="导出结果")
+    export_p.add_argument("format", nargs="?", default="json", help="导出格式")
+    
+    args = parser.parse_args()
+    
+    if args.command == "run":
+        return cmd_run(args)
+    elif args.command == "status":
+        return cmd_status(args)
+    elif args.command == "export":
+        return cmd_export(args)
     else:
-        result = {"error": f"未知命令: {cmd}"}
-    
-    print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+        parser.print_help()
+        return 1
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

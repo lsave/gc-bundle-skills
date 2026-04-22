@@ -1,0 +1,24 @@
+{
+  "name": "travel-planner",
+  "version": "3.0.0",
+  "scene": "懒人出游规划",
+  "category": "娱乐游戏",
+  "subtitle": "周末不知道去哪玩？直接喂到你嘴边",
+  "target_user": "上班族、情侣、家庭出游人群",
+  "core_need": "零动脑快速获得完整出游方案",
+  "trigger_words": [
+    "出游规划",
+    "周末去哪玩",
+    "旅行计划"
+  ],
+  "output_format": "文字行程方案 + 资源链接 + 天气提示",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "write_to_file"
+  ],
+  "dependencies": [],
+  "real_objects": "Markdown 行程文档（write_to_file）、天气数据",
+  "deliverables": "完整行程方案文档（Markdown）",
+  "need_external_search": "是"
+}

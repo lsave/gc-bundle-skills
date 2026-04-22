@@ -1,0 +1,26 @@
+{
+  "name": "content-creator",
+  "version": "3.0.0",
+  "scene": "自媒体内容一键生成",
+  "category": "自媒体营销",
+  "subtitle": "日更不知道写啥？定领域平台，全自动从选题到成文直接喂到发布",
+  "target_user": "自媒体博主、内容运营、个人IP打造者",
+  "core_need": "从选题到成文一条龙完成",
+  "trigger_words": [
+    "写文章",
+    "内容创作",
+    "自媒体"
+  ],
+  "output_format": "Markdown 文章 + 选题分析 + 发布建议",
+  "priority": "P2",
+  "tools": [
+    "web_search",
+    "write_to_file"
+  ],
+  "dependencies": [
+    "content-factory"
+  ],
+  "real_objects": "Markdown 文章文件（write_to_file）、热点数据",
+  "deliverables": "完整文章/帖子、封面标题建议、发布排期",
+  "need_external_search": "是"
+}

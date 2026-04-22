@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-社媒内容做同款 — 工具脚本
-将长文章/视频自动拆解为适合不同平台的短内容
+量化策略模拟回测 — 工具脚本
+策略靠不靠谱？用历史数据回测验证你的交易策略
 
-目标用户: 内容运营、自媒体博主、品牌方
-输出产物: 多平台内容包（小红书+推文+视频文案）
+目标用户: 量化爱好者、个人投资者
+输出产物: 回测报告（Markdown）、绩效数据表
 """
 
 import sys, json, os, argparse
@@ -19,43 +19,30 @@ def ensure_dirs():
 
 
 def cmd_run(args):
-    """社媒内容做同款 - 主工作流"""
+    """量化策略模拟回测 - 主工作流"""
     ensure_dirs()
     input_data = args.input or ""
     output_path = args.output or os.path.join(DATA_DIR, "output_{}.md".format(datetime.now().strftime("%Y%m%d_%H%M%S")))
     
-    # Generate Markdown report
-    report = f"""# 📋 社媒内容做同款
-
-**生成时间**: {datetime.now().strftime('%Y-%m-%d %H:%M')}
-**输入**: {input_data}
-
-## 分析结果
-
-[此处将由AI基于web_search/web_fetch的真实数据填充]
-
-## 详细内容
-
-| 序号 | 项目 | 状态 | 说明 |
-|------|------|------|------|
-| 1 | [待填充] | [待填充] | [待填充] |
-
-## 建议
-
-[基于分析给出的具体建议]
-
----
-*报告由AI自动生成，仅供参考*
-"""
+    # Generate Excel output
+    data = {
+        "项目": [f"项目{i+1}" for i in range(10)],
+        "状态": ["待处理"] * 10,
+        "说明": ["[待填充实际数据]"] * 10,
+        "优先级": ["P1"] * 5 + ["P2"] * 5,
+    }
+    df = pd.DataFrame(data)
     
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(report)
+    excel_path = output_path.replace(".md", ".xlsx") if output_path.endswith(".md") else output_path
+    if not excel_path.endswith(".xlsx"):
+        excel_path += ".xlsx"
+    df.to_excel(excel_path, index=False, engine="openpyxl")
     
     result = {
         "status": "success",
-        "output_file": output_path,
-        "input": input_data,
-        "message": f"社媒内容做同款报告已生成到 {output_path}",
+        "output_file": excel_path,
+        "rows": len(df),
+        "message": f"量化策略模拟回测数据已生成到 {excel_path}",
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
@@ -67,8 +54,8 @@ def cmd_status(args):
     if os.path.exists(DATA_DIR):
         data_files = [f for f in os.listdir(DATA_DIR) if not f.startswith(".")]
     result = {
-        "skill": "content-repurposer",
-        "scene": "社媒内容做同款",
+        "skill": "quant-backtester",
+        "scene": "量化策略模拟回测",
         "data_dir": DATA_DIR,
         "data_files": data_files,
         "file_count": len(data_files),
@@ -94,7 +81,7 @@ def cmd_export(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="社媒内容做同款")
+    parser = argparse.ArgumentParser(description="量化策略模拟回测")
     subparsers = parser.add_subparsers(dest="command", help="可用命令")
     
     run_p = subparsers.add_parser("run", help="执行主工作流")
