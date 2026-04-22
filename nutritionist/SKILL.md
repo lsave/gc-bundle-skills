@@ -1,5 +1,5 @@
 ---
-name: Nutritionist
+name: nutritionist
 description: Holistic nutrition guidance — food-health relationships, eating behaviors, sustainable habits, and nutritional education.
 metadata:
   category: role
