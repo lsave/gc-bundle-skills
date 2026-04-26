@@ -1,6 +1,6 @@
 ---
 name: geeclaw-openclaw
-description: "GeeClaw 内置 OpenClaw CLI 入口。任何需要执行 openclaw 命令的场景，都必须通过本 skill 的脚本执行。脚本会寻找 GeeClaw wrapper，并拒绝误用未知的 system openclaw。适用于 status、health、doctor、config、skills、plugins、models、agents、channels 等 OpenClaw CLI 操作。"
+description: "任何需要执行 openclaw 命令的场景，都必须通过本 skill 的脚本执行。脚本会寻找正确的openclaw命令，拒绝误用未知的 system-wide openclaw。适用于 gateway、status、health、doctor、config、skills、plugins、models、agents、channels 等 OpenClaw CLI 操作。"
 metadata: {"openclaw": {"emoji": "⚙️"}}
 ---
 
