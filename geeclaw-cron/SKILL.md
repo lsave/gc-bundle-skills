@@ -13,9 +13,9 @@ metadata: {"openclaw": {"emoji": "⚙️"}}
 
 | 场景 | 方式 |
 |------|------|
-| sender=`openclaw-control-ui`（本地） / channel=`wechat-access` / `dingtalk-connector` | **A：内置 `cron` 工具**（toolCall，JSON 参数） |
+| sender=`gateway-client`（本地） / channel=`wechat-access` / `dingtalk-connector` | **A：内置 `cron` 工具**（toolCall，JSON 参数） |
 | channel=`wecom`/`feishu`/`openclaw-weixin`/`qqbot` | **B：`openclaw cron add` CLI**（通过 `exec`） |
-| sender=`openclaw-control-ui` 但推送到外部渠道 | **B：CLI**（**必须**在创建成功后提醒用户前往“自动化”设置页手动配置推送渠道） |
+| sender=`gateway-client` 但推送到外部渠道 | **B：CLI**（**必须**在创建成功后提醒用户前往“自动化”设置页手动配置推送渠道） |
 
 > 外部渠道 session 中内置 `cron` 工具被 ownerOnly 策略过滤，LLM 不可见，必须走 CLI。dingtalk-connector可以使用内置`cron`工具。
 
