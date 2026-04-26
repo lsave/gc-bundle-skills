@@ -15,7 +15,7 @@ metadata: {"openclaw": {"emoji": "⚙️"}}
 |------|------|
 | sender=`gateway-client`（本地） / channel=`wechat-access` / `dingtalk-connector` | **A：内置 `cron` 工具**（toolCall，JSON 参数） |
 | channel=`wecom`/`feishu`/`openclaw-weixin`/`qqbot` | **B：`openclaw cron add` CLI**（通过 `exec`） |
-| sender=`gateway-client` 但推送到外部渠道 | **B：CLI**（**必须**在创建成功后提醒用户前往“自动化”设置页手动配置推送渠道） |
+| sender=`gateway-client` 但推送到外部渠道 | **B：CLI**（**必须**先使用"mode":"none"创建，在创建成功后提醒用户前往“自动化”设置页手动配置推送渠道） |
 
 > 外部渠道 session 中内置 `cron` 工具被 ownerOnly 策略过滤，LLM 不可见，必须走 CLI。dingtalk-connector可以使用内置`cron`工具。
 
@@ -67,10 +67,13 @@ metadata: {"openclaw": {"emoji": "⚙️"}}
 
 | 场景 | delivery |
 |------|----------|
-| 本地 | `{"mode":"announce"}` |
+| 本地 | `{"mode":"none"}` |
 | wechat-access | `{"mode":"announce","channel":"wechat-access","to":"<sender_id>"}` |
 | wecom/feishu/dingtalk | `{"mode":"announce","channel":"<渠道>","to":"<sender_id>"}` |
 | openclaw-weixin | `{"mode":"announce","channel":"openclaw-weixin","to":"<openid>@im.wechat"}` |
+
+**错误的配置方式：**
+`{"mode":"announce", "channel":"<渠道>", "to":"gateway-client"}` <- wrong to, gateway-client不是正确的sender_id。
 
 #### 方式 A：内置 `cron` 工具模板
 
